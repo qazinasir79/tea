@@ -1,0 +1,5 @@
+# SPA fallback — all routes serve index.html
+/*    /index.html   200
+
+# API proxy — uncomment and set your backend URL:
+# /api/*  https://your-backend.com/api/:splat  200
