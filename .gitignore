@@ -1,0 +1,13 @@
+__pycache__
+.venv/
+venv/
+.python-version
+for_publication/
+*.egg-info/
+frontend/dist/
+CLAUDE.md
+.vite/
+docs/_build/
+tutorial_videos/
+.flake8
+uv.lock

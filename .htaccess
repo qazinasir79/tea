@@ -1,0 +1,15 @@
+# Hostinger Passenger configuration
+# Place this in your domain root (same directory as passenger_wsgi.py)
+
+# Enable Passenger for Python apps
+PassengerEnabled On
+PassengerAppRoot /home/user/domain.com
+PassengerPython /home/user/domain.com/.venv/bin/python
+
+# Set the static files directory
+SetEnv STATIC_DIR /home/user/domain.com/public_html
+
+# Disable Passenger for static assets (let Apache serve them directly)
+<LocationMatch "^/(assets|videos|tutorials)/">
+    PassengerEnabled Off
+</LocationMatch>
