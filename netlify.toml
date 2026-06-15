@@ -7,7 +7,7 @@
   NODE_VERSION = "22"
 
 [functions]
-  directory = "../netlify/functions"
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/assets/*"

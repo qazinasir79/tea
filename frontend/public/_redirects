@@ -2,4 +2,4 @@
 /*    /index.html   200
 
 # API traffic → Netlify Function
-/api/*  /.netlify/functions/api/:splat  200
+/api/*  /.netlify/functions/api  200
