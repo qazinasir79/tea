@@ -1,5 +1,5 @@
+# API traffic → Netlify Function (must come before the SPA catch-all)
+/api/*  /.netlify/functions/api  200
+
 # SPA fallback — all routes serve index.html
 /*    /index.html   200
-
-# API traffic → Netlify Function
-/api/*  /.netlify/functions/api  200

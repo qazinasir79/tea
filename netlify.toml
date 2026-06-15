@@ -9,6 +9,11 @@
 [functions]
   directory = "netlify/functions"
 
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+
 [[headers]]
   for = "/assets/*"
   [headers.values]
