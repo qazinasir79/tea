@@ -5,8 +5,8 @@ import os
 from pathlib import Path
 
 # Ensure backend/ and src/ are importable.  This file lives at
-# frontend/netlify/functions/api.py, so we go up 4 levels to reach the repo root.
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+# netlify/functions/api.py — up 3 levels to reach the repo root.
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 for subdir in ("backend", "src"):
     p = str(REPO_ROOT / subdir)

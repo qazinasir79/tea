@@ -1,13 +1,13 @@
 [build]
-  base    = "frontend"
-  publish = "dist"
-  command = "npm run build"
+  command = "cd frontend && npm run build"
+  publish = "frontend/dist"
 
 [build.environment]
   NODE_VERSION = "22"
 
 [functions]
   directory = "netlify/functions"
+  included_files = ["backend/**", "src/**"]
 
 [[redirects]]
   from = "/api/*"
