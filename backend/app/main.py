@@ -12,14 +12,20 @@ from app.routers import equipment, plant, analysis, io
 
 app = FastAPI(title="OpenPyTEA GUI", version="2.0.0")
 
-# Production mode: STATIC_DIR env var overrides auto-detection
-STATIC_DIR = os.environ.get("STATIC_DIR")
-if STATIC_DIR:
-    FRONTEND_DIST = Path(STATIC_DIR)
-    PRODUCTION = True
+# Netlify: never serve static files (CDN handles the frontend).
+ON_NETLIFY = bool(os.environ.get("NETLIFY_FUNCTION"))
+
+# Production mode: STATIC_DIR env var overrides auto-detection.
+if not ON_NETLIFY:
+    STATIC_DIR = os.environ.get("STATIC_DIR")
+    if STATIC_DIR:
+        FRONTEND_DIST = Path(STATIC_DIR)
+        PRODUCTION = True
+    else:
+        FRONTEND_DIST = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
+        PRODUCTION = FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists()
 else:
-    FRONTEND_DIST = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
-    PRODUCTION = FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists()
+    PRODUCTION = True
 
 if PRODUCTION:
     origins = ["*"]
@@ -45,8 +51,8 @@ def health():
     return {"status": "ok"}
 
 
-# Serve production frontend (SPA fallback)
-if PRODUCTION:
+# Serve production frontend (SPA fallback) — skipped on Netlify
+if not ON_NETLIFY and PRODUCTION:
     assets_dir = FRONTEND_DIST / "assets"
     if assets_dir.is_dir():
         app.mount(
